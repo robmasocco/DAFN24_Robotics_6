@@ -1,0 +1,94 @@
+% Section 3 - Software tools of the trade
+% Roberto Masocco <roberto.masocco@uniroma2.it>
+% June 7, 2023
+
+% ### Software tools of the trade ###
+\section{Software tools of the trade}
+\graphicspath{{figs/section3/}}
+
+% --- OpenCV ---
+\begin{frame}{OpenCV}{The de-facto stadard library for computer vision}
+	\begin{columns}
+		\column{.5\textwidth}
+		\only<1>{
+			\hspace{-.1cm}\href{https://opencv.org/}{\color{blue}\underline{\textbf{OpenCV}}} is the largest open-source library for real-time \textbg{computer vision} and \textbg{image processing}. It has been developed initially by Intel, and evolved in a \textbg{cross-platform} library supporting \textbg{C++} and \textbg{Python}.
+			\newline\newline
+			It ships with hundreds of \textbg{APIs} and \textbg{algorithms} to perform a wide variety of image processing and computer vision tasks and computations.
+		}
+		\only<2>{
+			\hspace{-.25cm}In Linux, it is available as \textbg{binary packages}, but the full range of features can be enabled only by \textbg{configuring a source build}.
+			\newline\newline
+			Its \textbg{elementary data type} is a \textbg{matrix}: \texttt{cv::Mat}.
+			\newline\newline
+			It is \textbg{heavily optimized} to run on:
+			\begin{itemize}
+				\item \textbg{parallel CPUs};
+				\item \textbg{GPUs} (\emph{e.g.}, \texttt{cv::cuda}, \texttt{cv::ocl});
+				\item \textbg{embedded devices} (\emph{e.g.}, Nvidia Jetson).
+			\end{itemize}
+		}
+
+		\column{.5\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.6\textwidth]{opencv}
+			\caption{OpenCV logo.}
+			\label{fig:opencv}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+% --- ROS tools for image processing ---
+\begin{frame}{ROS tools for image processing}{A quick overview}
+	\textbg{ROS 2} provides a wide range of \textbg{tools} to acquire, process, and transmit images. The most important ones are:
+	\begin{itemize}
+		\item \texttt{sensor\_msgs/Image}: the standard ROS \textbg{message type} to transmit \textbg{images} over the DDS layer;
+		\item \texttt{sensor\_msgs/CameraInfo}: the standard ROS \textbg{message type} to transmit and parse \textbg{camera calibration parameters};
+		\item \href{https://wiki.ros.org/image_transport}{\color{blue}\underline{\texttt{image\_transport}}}: a ROS package to \textbg{transmit images} over the DDS layer;
+		\item \href{https://wiki.ros.org/camera_info_manager}{\color{blue}\underline{\texttt{camera\_info\_manager}}}: a library to parse, use, and store \textbg{camera calibration parameters} from configuration files and messages inside ROS nodes.
+	\end{itemize}
+\end{frame}
+\begin{frame}[fragile]{ROS tools for image processing}{The Image message}
+	\begin{columns}
+		\column{.9\textwidth}
+		\begin{lstlisting}[language=ros2msg, caption=Definition of the \texttt{sensor\_msgs/msg/Image} message.]
+std_msgs/Header header
+
+uint32 height
+uint32 width
+
+# This can be RGB, BGR, RGBA, BGRA, YUV, Bayer, etc.
+string encoding
+
+uint8 is_bigendian
+uint32 step
+uint8[] data\end{lstlisting}
+	\end{columns}
+\end{frame}
+\begin{frame}{ROS tools for image processing}{Sending images over the DDS}
+	Using images and video streams in general over the DDS layer is \textbg{not trivial}, since:
+	\begin{enumerate}
+		\item we would like some kind of \textbg{specialized transport strategy} to optimize throughput and latency;
+		\item the DDS specification is \textbg{not optimized} to transmit \textbg{large} and \textbg{variable-size} data chunks over potentially \textbg{lossy} networks, \emph{e.g.}, WiFi.
+	\end{enumerate}
+	\texttt{image\_transport} is a ROS 2 library that provides \textbg{wrappers} for \textbg{topic publishers} and \textbg{subscribers}, allowing to transmit images using different \textbg{transports}:
+	\begin{itemize}
+		\item \texttt{raw}: the default transport, which uses the \texttt{sensor\_msgs/Image} message;
+		\item \texttt{compressed}: uses the \texttt{sensor\_msgs/CompressedImage} message, automatically converting frames to \texttt{JPEG} or \texttt{PNG} format;
+		\item whatever you want to implement as a \textbg{plugin}.
+	\end{itemize}
+\end{frame}
+\begin{frame}{ROS tools for image processing}{A note on topics and their statistics}
+	\begin{alertblock}{Beware!}
+		\begin{enumerate}
+			\item When measuring image topics publishing rates with \texttt{ros2 topic hz}, especially \textbr{over a lossy network}, you may get \textbr{wrong results}. This is because of:
+			      \begin{itemize}
+				      \item the \textbr{Python DDS implementation};
+				      \item the \textbr{hz} Python tool buffering messages into a window-based filter.
+			      \end{itemize}
+			      To check the real sampling and receiving rates, \textbr{place publishers of ordinary messages} in your code on both ends, and inspect those instead!\\
+			      Suggestion: \texttt{std\_msgs/Empty}.
+      \item Always use a \textbr{best effort} reliability policy in the \textbr{QoS} policy.
+		\end{enumerate}
+	\end{alertblock}
+\end{frame}

@@ -1,0 +1,23 @@
+% Section 4 - Examples: a target detection pipeline
+% Roberto Masocco <roberto.masocco@uniroma2.it>
+% June 7, 2023
+
+% ### Examples: a target detection pipeline ###
+\section{Examples: a target detection pipeline}
+\graphicspath{{figs/section4/}}
+
+% --- ArUco detection pipeline ---
+\begin{frame}{ArUco detection pipeline}{A real example from LDC22}
+  Examples for this lecture are in the \href{https://github.com/IntelligentSystemsLabUTV/ros2-examples/tree/humble/src/cpp/image_processing}{\color{blue}\underline{\texttt{cpp/image\_processing}}} directory.\\
+  There are \textbg{three nodes}:
+  \begin{enumerate}
+    \item \texttt{ros2\_usb\_camera}: acquires images from a USB camera;
+    \item \texttt{aruco\_detector}: detects ArUco markers in a video stream;
+    \item \texttt{rqt\_image\_view}: forked version of the official ROS 2 video stream visualizer.
+  \end{enumerate}
+  These three nodes form a \textbg{pipeline} to detect \textbg{ArUco markers} in a video stream, and show them in a \textbg{GUI}. They are \textbg{completely configurable}, and \textbg{optimized} to run on \textbg{GPU} and similar hardware. They make use of \textbg{all the features we have seen so far}, plus \href{https://docs.ros.org/en/humble/Concepts/About-Composition.html}{\color{blue}\underline{composition}}: a way to include \textbg{multiple nodes} in a \textbg{single running process}, loading and unloading them dynamically, scheduling their work, and benefitting of \textbg{zero-copy} data transfer and shared address space.
+  \begin{block}{}
+    \centering
+    \textbf{Multiple instances of these nodes were active during the Leonardo Drone Contest 2022!}
+  \end{block}
+\end{frame}
