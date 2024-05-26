@@ -156,13 +156,13 @@
 	\begin{columns}
 		\column{.5\textwidth}
 		The \textbg{rectification map} is a \textbg{lookup table} that associates each pixel in the original frame with a pixel in the rectified frame, \textbg{interpolating} when necessary.\\
-    \bigskip
-    It is usually stored in \textbg{configuration files}, and must be applied to each frame before it can be used by other algorithms.
-    \vspace{.45cm}
-    \begin{block}{}
-      \centering
-      \textbf{ROS 2 offers the \href{https://navigation.ros.org/tutorials/docs/camera_calibration.html}{\color{blue}\underline{\texttt{cameracalibrator}}} tool in the \texttt{camera\_calibration} package to perform camera calibration.}
-    \end{block}
+		\bigskip
+		It is usually stored in \textbg{configuration files}, and must be applied to each frame before it can be used by other algorithms.
+		\vspace{.45cm}
+		\begin{block}{}
+			\centering
+			\textbf{ROS 2 offers the \href{https://navigation.ros.org/tutorials/docs/camera_calibration.html}{\color{blue}\underline{\texttt{cameracalibrator}}} tool in the \texttt{camera\_calibration} package to perform camera calibration.}
+		\end{block}
 
 		\column{.5\textwidth}
 		\begin{figure}
@@ -172,4 +172,57 @@
 			\label{fig:calibrated}
 		\end{figure}
 	\end{columns}
+\end{frame}
+
+% --- Event cameras ---
+\begin{frame}{Event cameras}{A new frontier in computer vision for robotics}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.76\textwidth]{event_camera_scheme.png}
+		\caption{Working principle of event cameras.}
+		\label{fig:eventcameraprinciple}
+	\end{figure}
+\end{frame}
+\begin{frame}{Event cameras}{A new frontier in computer vision for robotics}
+	\begin{columns}
+		\column{.5\textwidth}
+		\only<1>{
+			\nolistindent Also called \textbg{neuromorphic cameras}, they are a new type of visual sensor that provides \textbg{events} instead of \textbg{frames}, and are \textbg{complementary} to traditional cameras.
+		}
+		\only<2>{
+			\hspace{-8pt}They are characterized by:
+			\begin{itemize}
+				\item \textbg{no motion blur};
+				\item \textbg{high dynamic range};
+				\item \textbg{very low latency} (microseconds);
+				\item \textbg{low power consumption} (milliwatts).
+			\end{itemize}
+		}
+    \only<3>{
+      \hspace{-12pt}They are very recent (circa 2008), and are still in the \textbg{research phase}. They are being evaluated in \textbg{high-speed} and \textbg{high-dynamic range} applications, such as:
+      \begin{itemize}
+        \item \textbg{autonomous driving};
+        \item \textbg{localization and mapping};
+        \item \textbg{object tracking};
+        \item \textbg{industrial automation, inspection, and visual servoing};
+        \item \textbg{artificial intelligence}.
+      \end{itemize}
+    }
+
+		\column{.5\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=.9\textwidth]{event_camera.png}
+			\caption{Event camera from SynSense.}
+			\label{fig:eventcamera}
+		\end{figure}
+	\end{columns}
+\end{frame}
+\begin{frame}{Event cameras}{A new frontier in computer vision for robotics}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.51\textwidth]{event_camera_frame.jpg}
+		\caption{Frame from an event camera.}
+		\label{fig:eventcameraframe}
+	\end{figure}
 \end{frame}
