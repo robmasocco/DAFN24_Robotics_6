@@ -1,6 +1,6 @@
 % Section 4 - Examples: a target detection pipeline
 % Roberto Masocco <roberto.masocco@uniroma2.it>
-% June 7, 2023
+% % May 28, 2024
 
 % ### Examples: a target detection pipeline ###
 \section{Examples: a target detection pipeline}
@@ -15,7 +15,7 @@
     \item \texttt{aruco\_detector}: detects ArUco markers in a video stream;
     \item \texttt{rqt\_image\_view}: forked version of the official ROS 2 video stream visualizer.
   \end{enumerate}
-  These three nodes form a \textbg{pipeline} to detect \textbg{ArUco markers} in a video stream, and show them in a \textbg{GUI}. They are \textbg{completely configurable}, and \textbg{optimized} to run on \textbg{GPU} and similar hardware. They make use of \textbg{all the features we have seen so far}, plus \href{https://docs.ros.org/en/humble/Concepts/About-Composition.html}{\color{blue}\underline{composition}}: a way to include \textbg{multiple nodes} in a \textbg{single running process}, loading and unloading them dynamically, scheduling their work, and benefitting of \textbg{zero-copy} data transfer and shared address space.
+  These three nodes form a \textbg{pipeline} to detect \textbg{ArUco markers} in a video stream, and show them in a \textbg{GUI}. They are \textbg{completely configurable}, and \textbg{optimized} to run on \textbg{GPU} and similar hardware. They make use of \textbg{all the features we have seen so far} including composition, benefitting of \textbg{zero-copy} data transfer and shared address space.
   \begin{block}{}
     \centering
     \textbf{Multiple instances of these nodes were active during the Leonardo Drone Contest 2022!}

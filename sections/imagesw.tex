@@ -1,6 +1,6 @@
 % Section 3 - Software tools of the trade
 % Roberto Masocco <roberto.masocco@uniroma2.it>
-% June 7, 2023
+% May 28, 2024
 
 % ### Software tools of the trade ###
 \section{Software tools of the trade}
@@ -11,15 +11,15 @@
 	\begin{columns}
 		\column{.5\textwidth}
 		\only<1>{
-			\hspace{-.1cm}\href{https://opencv.org/}{\color{blue}\underline{\textbf{OpenCV}}} is the largest open-source library for real-time \textbg{computer vision} and \textbg{image processing}. It has been developed initially by Intel, and evolved in a \textbg{cross-platform} library supporting \textbg{C++} and \textbg{Python}.
-			\newline\newline
+			\hspace{-.1cm}\href{https://opencv.org/}{\color{blue}\underline{\textbf{OpenCV}}} is the largest open-source library for real-time \textbg{computer vision} and \textbg{image processing}. It has been developed initially by Intel, and evolved in a \textbg{cross-platform} library supporting \textbg{C++} and \textbg{Python}.\\
+			\bigskip
 			It ships with hundreds of \textbg{APIs} and \textbg{algorithms} to perform a wide variety of image processing and computer vision tasks and computations.
 		}
 		\only<2>{
-			\hspace{-.25cm}In Linux, it is available as \textbg{binary packages}, but the full range of features can be enabled only by \textbg{configuring a source build}.
-			\newline\newline
-			Its \textbg{elementary data type} is a \textbg{matrix}: \texttt{cv::Mat}.
-			\newline\newline
+			\hspace{-.25cm}In Linux, it is available as \textbg{binary packages}, but the full range of features can be enabled only by \textbg{configuring a source build}.\\
+			\bigskip
+			Its \textbg{elementary data type} is a \textbg{matrix}: \texttt{cv::Mat}.\\
+			\bigskip
 			It is \textbg{heavily optimized} to run on:
 			\begin{itemize}
 				\item \textbg{parallel CPUs};
@@ -81,14 +81,13 @@ uint8[] data\end{lstlisting}
 \begin{frame}{ROS tools for image processing}{A note on topics and their statistics}
 	\begin{alertblock}{Beware!}
 		\begin{enumerate}
-			\item When measuring image topics publishing rates with \texttt{ros2 topic hz}, especially \textbr{over a lossy network}, you may get \textbr{wrong results}. This is because of:
+			\item When measuring image topics publishing rates with \texttt{ros2 topic hz}, especially \textbr{over a lossy network}, you may get \textbr{high variance} or straight out \textbr{wrong results}. This is due to:
 			      \begin{itemize}
 				      \item the \textbr{Python DDS implementation};
+				      \item the \textbr{DDS struggling with large messages};
 				      \item the \textbr{hz} Python tool buffering messages into a window-based filter.
 			      \end{itemize}
-			      To check the real sampling and receiving rates, \textbr{place publishers of ordinary messages} in your code on both ends, and inspect those instead!\\
-			      Suggestion: \texttt{std\_msgs/Empty}.
-      \item Always use a \textbr{best effort} reliability policy in the \textbr{QoS} policy.
+      \item Always use a \textbr{best effort} reliability policy in the \textbr{QoS} policy \textbr{over lossy networks}.
 		\end{enumerate}
 	\end{alertblock}
 \end{frame}

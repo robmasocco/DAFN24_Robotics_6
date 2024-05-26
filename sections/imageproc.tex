@@ -1,6 +1,6 @@
 % Section 2 - Image processing
 % Roberto Masocco <roberto.masocco@uniroma2.it>
-% June 7, 2023
+% May 28, 2024
 
 % ### Image processing ###
 \section{Image processing}
@@ -123,8 +123,8 @@
 \begin{frame}{Lens distorsion}{Camera calibration and rectification}
 	\begin{columns}
 		\column{.5\textwidth}
-		\textbg{Pinhole cameras} generally introduce \textbg{radial distorsion} in the images they produce, \emph{i.e.}, \textbg{straight lines appear curved}. This is due to how the light enters the camera through the lens.
-		\newline\newline
+		\textbg{Pinhole cameras} generally introduce \textbg{radial distorsion} in the images they produce, \emph{i.e.}, \textbg{straight lines appear curved}. This is due to how the light enters the camera through the lens.\\
+		\bigskip
 		A \textbg{camera calibration} procedure is needed to estimate the parameters of the \textbg{distorsion model}, so that a \textbg{rectification map} can then be applied to each frame.
 
 		\column{.5\textwidth}
@@ -139,8 +139,8 @@
 \begin{frame}{Lens distorsion}{Camera calibration and rectification}
 	\begin{columns}
 		\column{.5\textwidth}
-		The calibration procedure usually involves moving a \textbg{checkerboard} of known dimensions in front of the camera, and taking several pictures of it from different angles.
-		\newline\newline
+		The calibration procedure usually involves moving a \textbg{checkerboard} of known dimensions in front of the camera, and taking several pictures of it from different angles.\\
+		\bigskip
 		An \textbg{estimation model} can then be used to estimate the parameters of the distorsion model, which can then be used to build the rectification map.
 
 		\column{.5\textwidth}
@@ -155,8 +155,8 @@
 \begin{frame}{Lens distorsion}{Camera calibration and rectification}
 	\begin{columns}
 		\column{.5\textwidth}
-		The \textbg{rectification map} is a \textbg{lookup table} that associates each pixel in the original frame with a pixel in the rectified frame, \textbg{interpolating} when necessary.
-    \newline\newline
+		The \textbg{rectification map} is a \textbg{lookup table} that associates each pixel in the original frame with a pixel in the rectified frame, \textbg{interpolating} when necessary.\\
+    \bigskip
     It is usually stored in \textbg{configuration files}, and must be applied to each frame before it can be used by other algorithms.
     \vspace{.45cm}
     \begin{block}{}
